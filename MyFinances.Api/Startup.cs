@@ -86,7 +86,7 @@ namespace MyFinances.Api
             app.UseHttpsRedirection();
             app.UseCors(builder =>
             {
-                builder.WithOrigins("https://localhost:44395").AllowAnyOrigin().AllowAnyHeader();
+                builder.WithOrigins("https://localhost:44395").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
             });
             app.UseMvc();
             //app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());

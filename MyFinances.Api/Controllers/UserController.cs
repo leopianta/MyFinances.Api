@@ -56,8 +56,9 @@ namespace MyFinances.Api.Controllers
         /// Excluir usuario
         /// </summary>
         /// <param name="DeleteUserCommand"></param>
-        [HttpGet("DeleteUser/{Id}")]
-        public async Task<ActionResult<CommandResult<User>>> DeleteUser(int Id)
+        //[HttpGet("DeleteUser/{Id}")]
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult<CommandResult<User>>> Delete(int Id)
         {
             //var response = await _mediator.Send(command);
             var response = await _userService.Delete(Id);
