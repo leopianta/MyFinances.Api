@@ -26,21 +26,22 @@ namespace MyFinances.Infra.Repository
             _config = config;
         }
 
-        public bool Delete(int id)
+        public bool DeleteUser(int id)
         {
             try
             {
                 using (var db = new MySqlConnection(this._config.DBConnectionString))
                 {
                     var entity = GetById(id);
-                    if (entity == null)
+                    if (entity != null)
                     {
-                        return db.Delete(entity);
+                        DtoModel viewModel = (DtoModel)_mapper.Map<EntityDomain, DtoModel>(entity);
+                        return db.Delete(viewModel);
                     }
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }

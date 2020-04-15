@@ -24,6 +24,20 @@ namespace MyFinances.Api.Controllers
         }
 
         /// <summary>
+        /// Todos os usuários
+        /// </summary>       
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var response = await _userService.GetAll();
+            if (response.Any())
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
+        /// <summary>
         /// Cadastrar usuario
         /// </summary>
         /// <param name="SaveUserCommand"></param>
@@ -39,18 +53,33 @@ namespace MyFinances.Api.Controllers
         }
 
         /// <summary>
-        /// Todos os usuários
-        /// </summary>       
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        /// Excluir usuario
+        /// </summary>
+        /// <param name="DeleteUserCommand"></param>
+        [HttpGet("DeleteUser/{Id}")]
+        public async Task<ActionResult<CommandResult<User>>> DeleteUser(int Id)
         {
-            var response = await _userService.GetAll();
-            if (response.Any())
+            //var response = await _mediator.Send(command);
+            var response = await _userService.Delete(Id);
+            if (response)
             {
                 return Ok(response);
             }
             return BadRequest(response);
         }
 
+        ///// <summary>
+        ///// Excluir usuário
+        ///// </summary>       
+        //[HttpPost("DeleteUsuario")]
+        //public async Task<IActionResult> DeleteUsuario([FromBody] int Id)
+        //{
+        //    var response = await _userService.Delete(Id);
+        //    if (response)
+        //    {
+        //        return Ok(response);
+        //    }
+        //    return BadRequest(response);
+        //}
     }
 }

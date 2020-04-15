@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MyFinances.Infra.Repository
 {
@@ -28,6 +29,27 @@ namespace MyFinances.Infra.Repository
             using (var db = new MySqlConnection(this._config.DBConnectionString))
             {
                 return (db.Select(select).ToList().Any()) ? true : false;
+            }
+        }
+
+        public bool DeleteUser(int Id)
+        {
+            try
+            {
+                var sqlStatement = $"DELETE FROM user WHERE Id = {Id} ";
+
+                using (var db = new MySqlConnection(this._config.DBConnectionString))
+                {
+                    var result = db.Execute(sqlStatement);
+                    return true;
+                }
+
+                
+            }
+            catch (Exception e)
+            {
+                var a = e;
+                return false;
             }
         }
 

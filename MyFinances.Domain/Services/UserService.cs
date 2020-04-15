@@ -23,6 +23,12 @@ namespace MyFinances.Domain.Services
             return result;
         }
 
+        public async Task<bool> Delete(int Id)
+        {
+            var result = _userRepository.DeleteUser(Id);
+
+            return result;
+        }
 
 
 
@@ -31,5 +37,6 @@ namespace MyFinances.Domain.Services
             GC.SuppressFinalize(this);
         }
 
-       }
+      
+    }
 }

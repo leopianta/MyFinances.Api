@@ -13,33 +13,31 @@ using System.Threading.Tasks;
 
 namespace MyFinances.Domain.Handlers
 {
-    public class UserHandler : Notifiable, IRequestHandler<SaveUserCommand, CommandResult<User>>
+    public class DeleteUserHandler : Notifiable, IRequestHandler<DeleteUserCommand, CommandResult<User>>
     {
         private readonly IUserRepository _userRepository;
-        public UserHandler(IUserRepository userRepository)
+        public DeleteUserHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
-
-        public Task<CommandResult<User>> Handle(SaveUserCommand request, CancellationToken cancellationToken)
+        public Task<CommandResult<User>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            var response = new CommandResult<User>("Salvo com sucesso", true, null);
+            var response = new CommandResult<User>("Excluído com sucesso", true, null);
             request.Validate();
             if (request.Valid)
             {
-                User user = new User(request.Nome, request.Email, request.Senha, request.TipoUsuario);
-                if (user.Valid)
+                var user = _userRepository.GetById(request.Id);
+                if (user != null && user.Id > 0)
                 {
-                    var result = _userRepository.GetList(x => x.nome == request.Nome && x.email == request.Email);
-                    if (result != null && result.Any())
-                    {
-                        response.Sucesso = false;
-                        response.Mensagem = "Usuário já foi cadastrado com esse nome e email.";
-                        return Task.FromResult(response);
-                    }
-                    if (_userRepository.Insert(ref user))
+                    if (_userRepository.DeleteUser(user.Id))
                     {
                         response.ObjetoResposta = user;
+                        return Task.FromResult(response);
+                    }
+                    else
+                    {
+                        response.Sucesso = false;
+                        response.Mensagem = "Não foi possível excluir este usuário.";
                         return Task.FromResult(response);
                     }
                 }
@@ -47,7 +45,7 @@ namespace MyFinances.Domain.Handlers
             }
             response.Notificacoes.AddRange(request.Notifications.Select(x => x.Message).ToList());
             response.Sucesso = false;
-            response.Mensagem = "Não foi possível cadastrar o usuário.";
+            response.Mensagem = "Não foi possível excluir o usuário.";
             return Task.FromResult(response);
         }
     }
