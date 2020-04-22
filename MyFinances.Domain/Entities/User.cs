@@ -24,5 +24,11 @@ namespace MyFinances.Domain.Entities
             //AddNotifications(nome); para validar campos com valueObject
         }
 
+        public User(string email, string senha)
+        {
+            this.email = email;
+            this.senha = senha;
+        }
+
     }
 }

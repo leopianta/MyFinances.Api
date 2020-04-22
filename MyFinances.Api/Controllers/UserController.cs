@@ -70,18 +70,20 @@ namespace MyFinances.Api.Controllers
             return BadRequest(response);
         }
 
-        ///// <summary>
-        ///// Excluir usuário
-        ///// </summary>       
-        //[HttpPost("DeleteUsuario")]
-        //public async Task<IActionResult> DeleteUsuario([FromBody] int Id)
-        //{
-        //    var response = await _userService.Delete(Id);
-        //    if (response)
-        //    {
-        //        return Ok(response);
-        //    }
-        //    return BadRequest(response);
-        //}
+        /// <summary>
+        /// Verificar Usuario (Login)
+        /// </summary>
+        /// <param name="LoginUserCommand"></param>
+        [HttpPost("VerificarUsuario")]
+        public async Task<ActionResult<CommandResult<User>>> VerificarUsuario([FromBody] LoginUserCommand command)
+        {
+            var response = await _mediator.Send(command);
+            if (response.Sucesso)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
     }
 }
