@@ -8,7 +8,8 @@ namespace MyFinances.Domain.Entities
 {
     public class User : Entity
     {
-   
+
+        public int id { get; set; }
         public string nome { get; private set; }
         public string email { get; private set; }
         public string senha { get; private set; }

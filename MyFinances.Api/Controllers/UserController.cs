@@ -30,7 +30,21 @@ namespace MyFinances.Api.Controllers
         public async Task<IActionResult> Get()
         {
             var response = await _userService.GetAll();
-            if (response.Any())
+            if (response != null || response.Any())
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
+        /// <summary>
+        /// Usuario por Id
+        /// </summary> 
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetById(int Id)
+        {
+            var response = await _userService.GetById(Id);
+            if (response != null)
             {
                 return Ok(response);
             }
@@ -53,6 +67,23 @@ namespace MyFinances.Api.Controllers
         }
 
         /// <summary>
+        /// Alterar usuario
+        /// </summary>
+        /// <param name="UpdateUserCommand"></param>
+        [HttpPut]
+        public async Task<ActionResult<CommandResult<User>>> Update([FromBody] UpdateUserCommand command)
+        {
+            //var command = new DeleteUserCommand(Id);
+            var response = await _mediator.Send(command);
+            if (response.Sucesso)
+            {
+                return Ok(response);
+
+            }
+            return BadRequest(response);
+        }
+
+        /// <summary>
         /// Excluir usuario
         /// </summary>
         /// <param name="DeleteUserCommand"></param>
@@ -60,9 +91,9 @@ namespace MyFinances.Api.Controllers
         [HttpDelete("{Id}")]
         public async Task<ActionResult<CommandResult<User>>> Delete(int Id)
         {
-            //var response = await _mediator.Send(command);
-            var response = await _userService.Delete(Id);
-            if (response)
+            var command = new DeleteUserCommand(Id);
+            var response = await _mediator.Send(command);
+            if (response.Sucesso)
             {
                 return Ok(response);
 

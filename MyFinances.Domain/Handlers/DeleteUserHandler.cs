@@ -40,8 +40,8 @@ namespace MyFinances.Domain.Handlers
                         response.Mensagem = "Não foi possível excluir este usuário.";
                         return Task.FromResult(response);
                     }
+                    response.Notificacoes.AddRange(user.Notifications.Select(x => x.Message).ToList());
                 }
-                response.Notificacoes.AddRange(user.Notifications.Select(x => x.Message).ToList());
             }
             response.Notificacoes.AddRange(request.Notifications.Select(x => x.Message).ToList());
             response.Sucesso = false;

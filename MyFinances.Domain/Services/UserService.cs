@@ -37,6 +37,11 @@ namespace MyFinances.Domain.Services
             GC.SuppressFinalize(this);
         }
 
-      
+        public async Task<User> GetById(int Id)
+        {
+            var result = _userRepository.GetById(Id);
+
+            return result;
+        }
     }
 }

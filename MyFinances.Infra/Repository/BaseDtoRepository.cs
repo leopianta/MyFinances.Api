@@ -86,9 +86,9 @@ namespace MyFinances.Infra.Repository
                 using (var db = new MySqlConnection(this._config.DBConnectionString))
                 {
                     Expression<Func<DtoModel, bool>> expression = (Expression<Func<DtoModel, bool>>)_mapper.Map<Expression<Func<EntityDomain, bool>>, Expression<Func<DtoModel, bool>>>(predicate);
-                    var xx = db.Select<DtoModel>(expression);
+                    var dbresult = db.Select<DtoModel>(expression);
 
-                    return default(List<EntityDomain>);
+                    return _mapper.Map<IEnumerable<EntityDomain>>(dbresult);
                 }
             }
             catch (Exception ex)

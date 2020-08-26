@@ -11,6 +11,7 @@ namespace MyFinances.Domain.Services
 
         //Task<IEnumerable<AvaliacaoContratoVM>> GetAvaliacoesPossiveisAync(CreateAvaliacaoFiltrosContratoVM filtros = null);
         Task<IEnumerable<User>> GetAll();
+        Task<User> GetById(int Id);
         Task<bool> Delete(int Id);
     }
 }
