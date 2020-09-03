@@ -44,11 +44,6 @@ namespace MyFinances.Domain.Handlers
                         //response.Mensagem = "Usuário já cadastrado com esse nome e email.";
                         return Task.FromResult(response);
                     }
-                    //if (_userRepository.Update(user))
-                    //{
-                    //    response.ObjetoResposta = user;
-                    //    return Task.FromResult(response);
-                    //}
                     response.Notificacoes.AddRange(user.Notifications.Select(x => x.Message).ToList());
                 }
             }

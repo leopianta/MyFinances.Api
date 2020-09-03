@@ -32,7 +32,7 @@ namespace MyFinances.Infra.Repository
             }
         }
 
-        public bool DeleteUser(int Id)
+        public bool Delete(int Id)
         {
             try
             {

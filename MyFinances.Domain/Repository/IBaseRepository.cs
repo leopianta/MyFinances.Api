@@ -12,7 +12,7 @@ namespace MyFinances.Domain.Repository
         TEntity GetById(int id);
         bool Insert(ref TEntity entity);
         bool Update(TEntity entity);
-        bool DeleteUser(int id);
+        bool Delete(int id);
         IEnumerable<TEntity> GetList(Expression<Func<TEntity, bool>> predicate);
     }
 }

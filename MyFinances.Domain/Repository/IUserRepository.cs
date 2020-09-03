@@ -8,7 +8,7 @@ namespace MyFinances.Domain.Repository
     public interface IUserRepository : IBaseRepository<User>
     {
         bool ExistsUserByName(User user);
-        bool DeleteUser(int Id);
+        bool Delete(int Id);
         
     }
 }

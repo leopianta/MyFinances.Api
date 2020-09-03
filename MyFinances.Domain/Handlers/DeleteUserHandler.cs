@@ -29,7 +29,7 @@ namespace MyFinances.Domain.Handlers
                 var user = _userRepository.GetById(request.Id);
                 if (user != null && user.Id > 0)
                 {
-                    if (_userRepository.DeleteUser(user.Id))
+                    if (_userRepository.Delete(user.Id))
                     {
                         response.ObjetoResposta = user;
                         return Task.FromResult(response);

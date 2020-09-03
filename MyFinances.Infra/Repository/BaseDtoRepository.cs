@@ -26,7 +26,7 @@ namespace MyFinances.Infra.Repository
             _config = config;
         }
 
-        public bool DeleteUser(int id)
+        public bool Delete(int id)
         {
             try
             {

@@ -25,7 +25,7 @@ namespace MyFinances.Domain.Services
 
         public async Task<bool> Delete(int Id)
         {
-            var result = _userRepository.DeleteUser(Id);
+            var result = _userRepository.Delete(Id);
 
             return result;
         }

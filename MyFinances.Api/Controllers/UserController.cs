@@ -24,7 +24,7 @@ namespace MyFinances.Api.Controllers
         }
 
         /// <summary>
-        /// Todos os usuários
+        /// Get all users
         /// </summary>       
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -38,7 +38,7 @@ namespace MyFinances.Api.Controllers
         }
 
         /// <summary>
-        /// Usuario por Id
+        /// User by id
         /// </summary> 
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetById(int Id)
@@ -52,7 +52,7 @@ namespace MyFinances.Api.Controllers
         }
 
         /// <summary>
-        /// Cadastrar usuario
+        /// Save User
         /// </summary>
         /// <param name="SaveUserCommand"></param>
         [HttpPost]
@@ -67,7 +67,7 @@ namespace MyFinances.Api.Controllers
         }
 
         /// <summary>
-        /// Alterar usuario
+        /// Update user
         /// </summary>
         /// <param name="UpdateUserCommand"></param>
         [HttpPut]
@@ -84,10 +84,9 @@ namespace MyFinances.Api.Controllers
         }
 
         /// <summary>
-        /// Excluir usuario
+        /// Delete User
         /// </summary>
-        /// <param name="DeleteUserCommand"></param>
-        //[HttpGet("DeleteUser/{Id}")]
+        /// <param name="DeleteUserCommand"></param>       
         [HttpDelete("{Id}")]
         public async Task<ActionResult<CommandResult<User>>> Delete(int Id)
         {
@@ -102,7 +101,7 @@ namespace MyFinances.Api.Controllers
         }
 
         /// <summary>
-        /// Verificar Usuario (Login)
+        /// Validate User (Login)
         /// </summary>
         /// <param name="LoginUserCommand"></param>
         [HttpPost("VerificarUsuario")]
